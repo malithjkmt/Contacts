@@ -99,7 +99,8 @@ public class NewContact extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         businessNameTxt = new javax.swing.JTextField();
         jPanel15 = new javax.swing.JPanel();
-        addressBusinessTxt = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        addressBusinessTxt = new javax.swing.JTextArea();
         jPanel16 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         emailBusinessTxt = new javax.swing.JTextField();
@@ -575,20 +576,19 @@ public class NewContact extends javax.swing.JFrame {
 
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Address"));
 
+        addressBusinessTxt.setColumns(20);
+        addressBusinessTxt.setRows(5);
+        jScrollPane3.setViewportView(addressBusinessTxt);
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(addressBusinessTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addComponent(addressBusinessTxt)
-                .addContainerGap())
+            .addComponent(jScrollPane3)
         );
 
         jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder("Internet"));
@@ -816,7 +816,7 @@ public class NewContact extends javax.swing.JFrame {
     private javax.swing.JTextField FaxTxt;
     private javax.swing.JTextField accountNOTxt;
     private javax.swing.JComboBox accountTypeCmb;
-    private javax.swing.JTextField addressBusinessTxt;
+    private javax.swing.JTextArea addressBusinessTxt;
     private javax.swing.JTextArea addressPersonalTxt;
     private javax.swing.JTextField ageTxt;
     private javax.swing.JTextField branchTxt;
@@ -875,6 +875,7 @@ public class NewContact extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField lastNameTxt;
     private javax.swing.JTextField mobile1Txt;
