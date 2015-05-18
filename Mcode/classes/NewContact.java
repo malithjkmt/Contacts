@@ -6,11 +6,16 @@
 package Mcode.classes;
 
 import java.beans.Statement;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,7 +40,6 @@ public class NewContact extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -70,10 +74,11 @@ public class NewContact extends javax.swing.JFrame {
         ageTxt = new javax.swing.JTextField();
         dobTxt = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
-        picTxt = new javax.swing.JTextField();
+        path = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jLabel21 = new javax.swing.JLabel();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        picLable = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -338,7 +343,7 @@ public class NewContact extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(picTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(path, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -348,10 +353,28 @@ public class NewContact extends javax.swing.JFrame {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(picTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(path, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jButton3)
                 .addComponent(jButton4))
         );
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(picLable, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(picLable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jDesktopPane1.setLayer(picLable, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -367,9 +390,9 @@ public class NewContact extends javax.swing.JFrame {
                         .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,8 +400,8 @@ public class NewContact extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jDesktopPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -760,8 +783,9 @@ public class NewContact extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, username, password);
             java.sql.Statement stmt = con.createStatement();
-            String Query = "INSERT INTO person (FirstName, LastName, `Group`, Tags, NIC, Sex, MobileOne,MobileTwo,Home, Office, Fax,PersonalAddress, OfficeAddress, Business, Notes, BirthDay, Picture, AccountNumber,NickName, Branch, CIFno, AccountType, EmailPersonal, EmailBusiness,WebPagePersonal,WebPageBusiness)values ('"+firstNameTxt.getText()+"','"+lastNameTxt.getText()+"','"+groupCmb.getSelectedItem()+"','"+tagsCmb.getSelectedItem()+"','"+nicTxt.getText()+"','"+sexTxt.getText()+"','"+mobile1Txt.getText()+"','"+mobile2Txt.getText()+"','"+homeTxt.getText()+"','"+phoneOfficeTxt.getText()+"','"+FaxTxt.getText()+"','"+addressPersonalTxt.getText()+"','"+addressBusinessTxt.getText()+"','"+businessNameTxt.getText()+"','"+notesTxt.getText()+"','"+dobTxt.getText()+"','"+picTxt.getText()+"','"+accountNOTxt.getText()+"','"+nickNameTxt.getText()+"','"+branchTxt.getText()+"','"+cifTxt.getText()+"','"+accountTypeCmb.getSelectedItem()+"','"+emailPersonalTxt.getText()+"','"+emailBusinessTxt.getText()+"','"+webPagePersonalTxt.getText()+"','"+webPageBusinessTxt.getText()+"')";
-           
+            String Query = "INSERT INTO person (FirstName, LastName, `Group`, Tags, NIC, Sex, MobileOne,MobileTwo,Home, Office, Fax,PersonalAddress, OfficeAddress, Business, Notes, BirthDay, Picture, AccountNumber,NickName, Branch, CIFno, AccountType, EmailPersonal, EmailBusiness,WebPagePersonal,WebPageBusiness)values ('"+firstNameTxt.getText()+"','"+lastNameTxt.getText()+"','"+groupCmb.getSelectedItem()+"','"+tagsCmb.getSelectedItem()+"','"+nicTxt.getText()+"','"+sexTxt.getText()+"','"+mobile1Txt.getText()+"','"+mobile2Txt.getText()+"','"+homeTxt.getText()+"','"+phoneOfficeTxt.getText()+"','"+FaxTxt.getText()+"','"+addressPersonalTxt.getText()+"','"+addressBusinessTxt.getText()+"','"+businessNameTxt.getText()+"','"+notesTxt.getText()+"','"+dobTxt.getText()+"',?,'"+accountNOTxt.getText()+"','"+nickNameTxt.getText()+"','"+branchTxt.getText()+"','"+cifTxt.getText()+"','"+accountTypeCmb.getSelectedItem()+"','"+emailPersonalTxt.getText()+"','"+emailBusinessTxt.getText()+"','"+webPagePersonalTxt.getText()+"','"+webPageBusinessTxt.getText()+"')";
+            
+            
             stmt.execute(Query);
             JOptionPane.showMessageDialog(null, "A new contact is added");
         
@@ -774,6 +798,25 @@ public class NewContact extends javax.swing.JFrame {
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        JFileChooser ch = new JFileChooser();
+        ch.showOpenDialog((null));
+        File f = ch.getSelectedFile();
+        fileName = f.getAbsolutePath();
+        path.setText(fileName);
+        try{
+            File image = new File (fileName);
+            FileInputStream fis = new FileInputStream(image);
+            
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            for(int readNum;(readNum=fis.read(buf))!=-1;){
+                bos.write(buf,0,readNum);
+            }
+        person_image = bos.toByteArray();    
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -833,7 +876,7 @@ public class NewContact extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JFileChooser jFileChooser1;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -847,7 +890,6 @@ public class NewContact extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -883,12 +925,17 @@ public class NewContact extends javax.swing.JFrame {
     private javax.swing.JTextField nicTxt;
     private javax.swing.JTextField nickNameTxt;
     private javax.swing.JTextArea notesTxt;
+    private javax.swing.JTextField path;
     private javax.swing.JTextField phoneOfficeTxt;
-    private javax.swing.JTextField picTxt;
+    private javax.swing.JLabel picLable;
     private javax.swing.JButton saveBtn;
     private javax.swing.JTextField sexTxt;
     private javax.swing.JComboBox tagsCmb;
     private javax.swing.JTextField webPageBusinessTxt;
     private javax.swing.JTextField webPagePersonalTxt;
     // End of variables declaration//GEN-END:variables
+    private ImageIcon format = null;
+    String fileName = null;
+    int s = 0;
+    byte[] person_image = null;
 }
